@@ -128,7 +128,7 @@ RUN set -ex \
 
 # Cleanup
 RUN set -ex \
-    && apk del .fetch-deps .build-deps .build-deps-testing
+    && apk del .fetch-deps .build-deps .build-deps-testing .cgal-build-deps .sfcgal-build-deps
 
 COPY ./initdb-postgis.sh /docker-entrypoint-initdb.d/postgis.sh
 COPY ./update-postgis.sh /usr/local/bin
