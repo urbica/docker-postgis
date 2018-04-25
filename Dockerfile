@@ -126,7 +126,32 @@ RUN set -ex \
     && cd / \
     && rm -rf /usr/src/postgis
 
+# PG Routing
+
+ENV PGROUTING_VERSION 2.6.0
+
+RUN set -ex \
+    && wget -O pgrouting.tar.gz "https://github.com/pgRouting/pgrouting/releases/download/v$PGROUTING_VERSION/pgrouting-$PGROUTING_VERSION.tar.gz" \
+    && mkdir -p /usr/src/pgrouting \
+    && tar \
+        --extract \
+        --file pgrouting.tar.gz \
+        --directory /usr/src/pgrouting \
+        --strip-components 1 \
+    && rm pgrouting.tar.gz
+
+RUN set -ex \
+    && cd /usr/src/pgrouting \
+    && mkdir build \
+    && cd build \
+    && cmake .. \
+    && make \
+    && make install \
+    && cd / \
+    && rm -rf /usr/src/postgis
+
 # Cleanup
+
 RUN set -ex \
     && apk del .fetch-deps .build-deps .build-deps-testing .cgal-build-deps .sfcgal-build-deps
 
