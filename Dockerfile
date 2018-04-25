@@ -1,5 +1,6 @@
 FROM postgres:10.3-alpine
-MAINTAINER Nick Lebedev <nextstopsun@gmail.com>
+LABEL maintainer="Nick Lebedev <nextstopsun@gmail.com>"
+LABEL authors="Nick Lebedev <nextstopsun@gmail.com>, Stepan Kuzmin <to.stepan.kuzmin@gmail.com>"
 
 RUN set -ex \
     && apk add --no-cache --virtual .fetch-deps \
