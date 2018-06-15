@@ -1,4 +1,4 @@
-FROM postgres:10.3
+FROM postgres:10.4
 LABEL maintainer="Stepan Kuzmin <to.stepan.kuzmin@gmail.com>"
 
 ENV POSTGIS_VERSION 2.4
