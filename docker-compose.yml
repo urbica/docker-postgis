@@ -1,0 +1,26 @@
+version: '3.6'
+
+services:
+  db_master:
+    build: .
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_REPLICATION_MODE=master
+      - POSTGRES_REPLICATION_USER=replicate
+      - POSTGRES_REPLICATION_PASSWORD=123qwe
+    volumes:
+      - ./db_master:/var/lib/postgresql/data
+
+  db_slave:
+    build: .
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_REPLICATION_MODE=slave
+      - POSTGRES_REPLICATION_USER=replicate
+      - POSTGRES_REPLICATION_PASSWORD=123qwe
+      - POSTGRES_MASTER_HOST=db_master
+      - POSTGRES_MASTER_PORT=5432
+    volumes:
+      - ./db_slave:/var/lib/postgresql/data
