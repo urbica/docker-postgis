@@ -55,10 +55,10 @@ A Streaming replication cluster can be setup with using the following environmen
 
 ```shell
 docker run --name db_master \
+  -e POSTGRES_DB=db \
+  -e POSTGRES_USER=user \
+  -e POSTGRES_PASSWORD=user_password \
   -e POSTGRES_REPLICATION_MODE=master \
-  -e POSTGRES_REPLICATION_USER=user \
-  -e POSTGRES_REPLICATION_PASSWORD=user_password \
-  -e POSTGRES_DB=my_database \
   -e POSTGRES_REPLICATION_USER=replicate \
   -e POSTGRESQL_REPLICATION_PASSWORD=replicate_password \
   urbica/postgis
@@ -69,10 +69,10 @@ docker run --name db_master \
 ```shell
 docker run --name db_slave \
   --link db_master \
+  -e POSTGRES_DB=db \
+  -e POSTGRES_USER=user \
+  -e POSTGRES_PASSWORD=user_password \
   -e POSTGRES_REPLICATION_MODE=slave \
-  -e POSTGRES_REPLICATION_USER=user \
-  -e POSTGRES_REPLICATION_PASSWORD=user_password \
-  -e POSTGRES_DB=my_database \
   -e POSTGRES_REPLICATION_USER=replicate \
   -e POSTGRESQL_REPLICATION_PASSWORD=replicate_password \
   urbica/postgis
