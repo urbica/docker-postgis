@@ -8,6 +8,7 @@ RUN set -ex && apt-get update && apt-get install -y --no-install-recommends \
     postgresql-$PG_MAJOR-postgis-$POSTGIS_VERSION-scripts \
     postgresql-$PG_MAJOR-pgrouting \
     postgresql-$PG_MAJOR-pgrouting-scripts \
+    postgresql-$PG_MAJOR-mysql-fdw \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PGCONFD /var/lib/postgresql/conf.d

@@ -7,6 +7,7 @@ Based on official [postgres:10](https://hub.docker.com/_/postgres/) image.
 
 - [PostGIS](https://postgis.net/) with topology
 - [pgRouting](https://pgrouting.org/)
+- [MySQL Foreign Data Wrapper](https://github.com/EnterpriseDB/mysql_fdw)
 - [Configuration managment](https://www.postgresql.org/docs/10/static/config-setting.html#CONFIG-INCLUDES)
 - [Streaming Replication](https://www.postgresql.org/docs/10/static/warm-standby.html#STREAMING-REPLICATION)
 
