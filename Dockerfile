@@ -16,6 +16,7 @@ RUN set -ex && apt-get update -q && apt-get install -y --no-install-recommends \
     libproj-dev \
     libprotobuf-c-dev \
     libtool \
+    libxml2-dev \
     postgresql-server-dev-10 \
     protobuf-c-compiler \
     xsltproc \
