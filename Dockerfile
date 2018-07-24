@@ -10,8 +10,8 @@ RUN set -ex && apt-get update -q && apt-get install -y --no-install-recommends \
     docbook-mathml \
     docbook-xsl \
     git \
-    # libgdal-dev \
-    # libgeos-dev \
+    libgdal-dev \
+    libgeos-dev \
     libjson-c-dev \
     libproj-dev \
     libprotobuf-c-dev \
@@ -22,29 +22,29 @@ RUN set -ex && apt-get update -q && apt-get install -y --no-install-recommends \
     xsltproc \
     && rm -rf /var/lib/apt/lists/*
 
-# Install GDAL
-ENV GDAL_VERSION 2.3.1
-RUN set -ex \
-    && curl -O http://download.osgeo.org/gdal/$GDAL_VERSION/gdal-$GDAL_VERSION.tar.gz \
-    && tar xvzf gdal-$GDAL_VERSION.tar.gz \
-    && cd gdal-$GDAL_VERSION \
-    && ./configure \
-    && make \
-    && make install \
-    && cd .. \
-    && rm -rf gdal-$GDAL_VERSION*
+# # Install GDAL
+# ENV GDAL_VERSION 2.3.1
+# RUN set -ex \
+#     && curl -O http://download.osgeo.org/gdal/$GDAL_VERSION/gdal-$GDAL_VERSION.tar.gz \
+#     && tar xvzf gdal-$GDAL_VERSION.tar.gz \
+#     && cd gdal-$GDAL_VERSION \
+#     && ./configure \
+#     && make \
+#     && make install \
+#     && cd .. \
+#     && rm -rf gdal-$GDAL_VERSION*
 
-# Install GEOS
-ENV GEOS_VERSION 3.7.0beta1
-RUN set -ex \
-    && curl -O http://download.osgeo.org/geos/geos-$GEOS_VERSION.tar.bz2 \
-    && tar xvjf geos-$GEOS_VERSION.tar.bz2 \
-    && cd geos-$GEOS_VERSION \
-    && ./configure \
-    && make \
-    && make install \
-    && cd .. \
-    && rm -rf geos-$GEOS_VERSION*
+# # Install GEOS
+# ENV GEOS_VERSION 3.7.0beta1
+# RUN set -ex \
+#     && curl -O http://download.osgeo.org/geos/geos-$GEOS_VERSION.tar.bz2 \
+#     && tar xvjf geos-$GEOS_VERSION.tar.bz2 \
+#     && cd geos-$GEOS_VERSION \
+#     && ./configure \
+#     && make \
+#     && make install \
+#     && cd .. \
+#     && rm -rf geos-$GEOS_VERSION*
 
 # Install PostGIS from mvt-feature-id fork
 RUN set -ex \
@@ -58,9 +58,22 @@ RUN set -ex \
     && make clean \
     && make \
     && make install \
-    && ldconfig /usr/lib/postgresql/10/lib/postgis-2.5.so \
+    # && ldconfig /usr/lib/postgresql/10/lib/postgis-2.5.so \
     && cd .. \
     && rm -rf postgis
+
+RUN set -ex && apt-get autoremove -y \
+    autoconf \
+    automake \
+    build-essential \
+    ca-certificates \
+    curl \
+    docbook-mathml \
+    docbook-xsl \
+    git \
+    libtool \
+    postgresql-server-dev-10 \
+    xsltproc
 
 ENV PGCONFD /var/lib/postgresql/conf.d
 VOLUME /var/lib/postgresql/conf.d
